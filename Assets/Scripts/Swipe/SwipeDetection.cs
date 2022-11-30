@@ -1,14 +1,17 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SwipeDetection : MonoBehaviour
 {
-    [SerializeField]
+    /*[SerializeField]
     private float minimumDistance = .2f;
     [SerializeField]
-    private float maximumTime = 1f;
+    private float maximumTime = 1f;*/
+    [SerializeField]
+    public GameObject trail;
 
-
+    private Coroutine coroutine;
     private TouchManager touchManager;
 
     private Vector2 startPosition;
@@ -32,25 +35,40 @@ public class SwipeDetection : MonoBehaviour
     private void SwipeStart(Vector2 position, float time)
     {
         startPosition = position;
-        startTime = time;   
+        startTime = time;
+        trail.SetActive(true);
+        trail.transform.position = position;
+        coroutine = StartCoroutine(Trail());
     }
+
+    private IEnumerator Trail()
+    {
+        while (true)
+        {
+            trail.transform.position = touchManager.PrimaryPosition();
+            yield return null;
+        }
+    }
+
     private void SwipeEnd(Vector2 position, float time)
     {
-        endPosition = position*11; 
+        trail.SetActive(false);
+        StopCoroutine(coroutine);
+        endPosition = position; 
         endTime = time;
-        Debug.Log("calling detect swipe");
-        DetectSwipe();
+        //Debug.Log("calling detect swipe");
+        //DetectSwipe();
     }
-    private void DetectSwipe()
+    /*private void DetectSwipe()
     {
-        Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
-        Debug.Log("In swipe if, start end distance:" + startPosition+endPosition);
+       // Debug.DrawLine(startPosition, endPosition, Color.red, 5f);
+        //Debug.Log("In swipe if, start end distance:" + startPosition+endPosition);
 
-        /*if (Vector3.Distance(startPosition, endPosition) >= minimumDistance && (endTime-startTime)<=maximumTime)
+        if (Vector3.Distance(startPosition, endPosition) >= minimumDistance && (endTime-startTime)<=maximumTime)
         {
-            Debug.Log("In swipe if");
+            //Debug.Log("In swipe if");
             Debug.DrawLine(startPosition, endPosition,Color.red, 5f);
 
-        }*/
-    }
+        }
+    }*/
 }

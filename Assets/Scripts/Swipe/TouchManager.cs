@@ -35,8 +35,9 @@ public class TouchManager : Singleton<TouchManager>
     }
     private void StartTouchPrimary(InputAction.CallbackContext context)
     {
-        Debug.Log("Swipe start position:" + inputTouch.TouchInput.PrimaryPosition.ReadValue<Vector2>());
+        //Debug.Log("Swipe start position:" + inputTouch.TouchInput.PrimaryPosition.ReadValue<Vector2>());
         if (OnStartTouch != null) OnStartTouch(Utils.ScreenToWorld(mainCamera,inputTouch.TouchInput.PrimaryPosition.ReadValue<Vector2>()),(float)context.startTime);
+
     }
     private void EndTouchPrimary(InputAction.CallbackContext context)
     {

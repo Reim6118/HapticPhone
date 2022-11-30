@@ -21,7 +21,7 @@ public class ArduinoSerial : MonoBehaviour
 */
 using UnityEngine;
 using System.IO.Ports;
-public class ArduinoSerial : ButtonPositionUpdate
+public class ArduinoSerial : GetCollidedArray
 {
     SerialPort sp;
     float next_time; int ii = 0;
@@ -59,8 +59,8 @@ public class ArduinoSerial : ButtonPositionUpdate
             }
             if (sp.IsOpen)
             {
-                print("Writing " + ButtonString);
-                sp.Write(ButtonString);
+                print("Writing " + collidedString);
+                sp.Write(collidedString);
             }
             
         }
