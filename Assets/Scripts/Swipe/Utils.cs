@@ -8,7 +8,7 @@ public class Utils : MonoBehaviour
     {
         position.z = camera.nearClipPlane;
         
-        Debug.Log("Camera position:" + camera.ScreenToWorldPoint(position));
+        //Debug.Log("Camera position:" + camera.ScreenToWorldPoint(position));
         return camera.ScreenToWorldPoint(position);
     }
 }
