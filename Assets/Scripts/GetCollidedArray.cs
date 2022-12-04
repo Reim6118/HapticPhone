@@ -25,19 +25,22 @@ public class GetCollidedArray : OnCollision
         if (timer >= timeGap)
         {
             //Debug.Log("Timer" + timer);
-            collidedString = String.Join("",
+            /*collidedString = String.Join("",
              new List<int>(ActivatedArray)
              .ConvertAll(i => i.ToString())
              .ToArray());
-            Debug.Log(collidedString);
-            SumArray = SumArray.Concat(ActivatedArray).ToArray();                
-           
+            Debug.Log(collidedString);*/
+            if (StopButton.isPaused !=true)
+            {
+                SumArray = SumArray.Concat(ActivatedArray).ToArray();
+                counter += 1;
+            }
             Array.Clear(ActivatedArray, 0, 5);
             Debug.Log("SumArray" + String.Join("",
              new List<int>(SumArray)
              .ConvertAll(i => i.ToString())
              .ToArray()));
-            counter += 1;
+            
             timer = 0;
         }
         if (counter == 8)
