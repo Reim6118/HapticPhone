@@ -31,7 +31,7 @@ public class VideoControl : MonoBehaviour
         if (vidPlayer != null)
         {
             currentTime = vidPlayer.time;
-            Debug.Log("Current Time:" + currentTime);
+            //Debug.Log("Current Time:" + currentTime);
         }
     }
 }

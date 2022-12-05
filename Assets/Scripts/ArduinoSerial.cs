@@ -21,10 +21,11 @@ public class ArduinoSerial : MonoBehaviour
 */
 using UnityEngine;
 using System.IO.Ports;
-public class ArduinoSerial : GetCollidedArray
+public class ArduinoSerial : MonoBehaviour
 {
     SerialPort sp;
     float next_time; int ii = 0;
+    private float timer;
     // Use this for initialization
     void Start()
     {
@@ -36,7 +37,7 @@ public class ArduinoSerial : GetCollidedArray
             print(mysps);
             if (mysps != "COM1") { the_com = mysps; break; }
         }
-        sp = new SerialPort("\\\\.\\" + the_com, 9600);
+        sp = new SerialPort("\\\\.\\" + the_com, 115200);
         if (!sp.IsOpen)
         {
             print("Opening " + the_com + ", baud 9600");
@@ -49,8 +50,9 @@ public class ArduinoSerial : GetCollidedArray
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
        // Debug.Log("Timer in child=" + timer);
-        if (timer >= 0.9)
+        if (timer >= 2)
         {
             if (!sp.IsOpen)
             {
@@ -59,10 +61,10 @@ public class ArduinoSerial : GetCollidedArray
             }
             if (sp.IsOpen)
             {
-                print("Writing " + collidedString);
-                sp.Write(collidedString);
+                print("Writing " + GetCollidedArray.StringActivatedArray + "Timer = "+timer);
+                sp.Write(GetCollidedArray.StringActivatedArray);
             }
-            
+            timer = 0;
         }
     }
 }

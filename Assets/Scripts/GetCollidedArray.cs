@@ -14,10 +14,22 @@ public class GetCollidedArray : OnCollision
     private int counter = 0;
     protected static int[] SumArray = new int[5];  // need to change if array become bigger
     protected static string collidedString;
-    private void Start()
+    private static string stringSumArray;
+    private static string stringActivatedArray;
+
+
+
+    public static string StringSumArray 
     {
-         
+        get{return stringSumArray;}
+       // set { stringSumArray = value;}
     }
+    public static string StringActivatedArray
+    {
+        get { return stringActivatedArray;}
+    }
+
+
     void Update()
     {
 
@@ -32,6 +44,7 @@ public class GetCollidedArray : OnCollision
             Debug.Log(collidedString);*/
             if (StopButton.isPaused !=true)
             {
+                stringActivatedArray = String.Join("",new List<int>(ActivatedArray).ConvertAll(i => i.ToString()).ToArray());
                 SumArray = SumArray.Concat(ActivatedArray).ToArray();
                 counter += 1;
             }
@@ -47,11 +60,12 @@ public class GetCollidedArray : OnCollision
         {
             using(StreamWriter sw = new StreamWriter("HapticArray.txt"))
             {
-                foreach (int number in SumArray)
+                stringSumArray = String.Join("",new List<int>(SumArray).ConvertAll(i => i.ToString()).ToArray());
+                /*foreach (int number in SumArray)
                 {
                     sw.WriteLine(number);
-                }
-
+                }*/
+                sw.WriteLine(stringSumArray);
             }
         }
 

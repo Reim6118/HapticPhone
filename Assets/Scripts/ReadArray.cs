@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class ReadArray : GetCollidedArray
 {
-    private float timerself;
-    private int[] slicedArray = new int[5];
+    /*private float timerself;
+    private int[] slicedArray = new int[5];*/
     protected int[] readArray = new int[] { };
     int x = 0;
-    int a = 0;
-    int b = 5;
+    /*int a = 0;
+    int b = 5;*/
 
     // 應該是要從檔案read全部的array進來，然後切割，每固定秒數讀一次slice出來的array
     /*private void Start()
@@ -68,9 +68,14 @@ public class ReadArray : GetCollidedArray
 
          }*/
         string[] str = File.ReadAllLines("HapticArray.txt");
-        Debug.Log("stLine = " + String.Join("",
+        /*Debug.Log("stLine = " + String.Join("",
               new List<string>(str)
               .ConvertAll(i => i.ToString())
-              .ToArray()));
+              .ToArray()));*/
+        foreach (string str2 in str)
+        {
+            Debug.Log("str = " + str2);
+        }
+        
     }
 }
