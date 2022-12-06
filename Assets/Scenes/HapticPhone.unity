@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 48838469}
   - component: {fileID: 48838468}
   m_Layer: 0
-  m_Name: 1-2 (1)
+  m_Name: 2-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -430,7 +430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441f98ee64fa2f1408537834136d0de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeGap: 1
 --- !u!1 &244293188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,7 +1877,7 @@ GameObject:
   - component: {fileID: 644748036}
   - component: {fileID: 644748035}
   m_Layer: 0
-  m_Name: 1-3 (1)
+  m_Name: 2-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2609,7 +2608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c42a0d6b35c841bcb4ab0c5bf101747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeGap: 1
 --- !u!4 &1005653632
 Transform:
   m_ObjectHideFlags: 0
@@ -3010,7 +3008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c42a0d6b35c841bcb4ab0c5bf101747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeGap: 1
 --- !u!212 &1379436343
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3075,7 +3072,7 @@ GameObject:
   - component: {fileID: 1453579417}
   - component: {fileID: 1453579416}
   m_Layer: 0
-  m_Name: 1-1 (1)
+  m_Name: 2-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3186,7 +3183,7 @@ GameObject:
   - component: {fileID: 1549612389}
   - component: {fileID: 1549612388}
   m_Layer: 0
-  m_Name: 1-4 (1)
+  m_Name: 2-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4102,7 +4099,7 @@ GameObject:
   - component: {fileID: 2092242303}
   - component: {fileID: 2092242302}
   m_Layer: 0
-  m_Name: 1-5 (1)
+  m_Name: 2-5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

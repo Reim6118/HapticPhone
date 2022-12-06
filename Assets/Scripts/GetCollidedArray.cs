@@ -7,12 +7,21 @@ using System.IO;
 
 public class GetCollidedArray : OnCollision
 {
-    [SerializeField]
-    protected float timeGap;
+    private static float timeGap = 0.9F;
+
+    private static int arraysize = 5;
+    public static float TimeGap
+    {
+        get => timeGap;
+    }
+    public static int ArraySize
+    {
+        get => arraysize;
+    }
    
     protected static float timer;
     private int counter = 0;
-    protected static int[] SumArray = new int[5];  // need to change if array become bigger
+    protected static int[] SumArray = new int[arraysize];  // need to change if array become bigger
     protected static string collidedString;
     private static string stringSumArray;
     private static string stringActivatedArray;
@@ -36,6 +45,7 @@ public class GetCollidedArray : OnCollision
         timer += Time.deltaTime;
         if (timer >= timeGap)
         {
+            
             //Debug.Log("Timer" + timer);
             /*collidedString = String.Join("",
              new List<int>(ActivatedArray)
@@ -45,16 +55,18 @@ public class GetCollidedArray : OnCollision
             if (StopButton.isPaused !=true)
             {
                 stringActivatedArray = String.Join("",new List<int>(ActivatedArray).ConvertAll(i => i.ToString()).ToArray());
-                SumArray = SumArray.Concat(ActivatedArray).ToArray();
+                Debug.Log(StringActivatedArray  +"Timer "+timer);
+                SumArray = SumArray.Concat(ActivatedArray).ToArray();   //merge all the informations of blocks
                 counter += 1;
             }
-            Array.Clear(ActivatedArray, 0, 5);
-            Debug.Log("SumArray" + String.Join("",
-             new List<int>(SumArray)
-             .ConvertAll(i => i.ToString())
-             .ToArray()));
-            
             timer = 0;
+            Array.Clear(ActivatedArray, 0,arraysize);           // 這裡也要改
+            //Debug.Log("SumArray" + String.Join("",
+            // new List<int>(SumArray)
+            // .ConvertAll(i => i.ToString())
+            // .ToArray()));
+            
+            
         }
         if (counter == 8)
         {
