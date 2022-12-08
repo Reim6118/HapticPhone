@@ -54,8 +54,8 @@ public class SwipeDetection : MonoBehaviour
     {
         trail.SetActive(false);
         StopCoroutine(coroutine);
-        endPosition = position; 
-        endTime = time;
+        //endPosition = position; 
+        //endTime = time;
         //Debug.Log("calling detect swipe");
         //DetectSwipe();
     }

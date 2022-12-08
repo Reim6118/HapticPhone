@@ -9,7 +9,7 @@ public class OnCollision : MonoBehaviour
     protected static int[] ActivatedArray = new int[GetCollidedArray.ArraySize]; //array大小改這裡
     private void OnCollisionEnter2D(Collision2D collision)  //will assign the colided object to collision parameter
     {
-        //Debug.Log("hit!:"+collision.gameObject.name);
+        Debug.Log("hit!:"+collision.gameObject.name);
         switch (collision.gameObject.name)
         {
             case "1-1":
