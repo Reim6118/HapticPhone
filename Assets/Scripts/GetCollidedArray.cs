@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System.IO;
 
 public class GetCollidedArray : OnCollision
 {
@@ -25,6 +23,7 @@ public class GetCollidedArray : OnCollision
     protected static string collidedString;
     private static string stringSumArray;
     private static string stringActivatedArray;
+    private int a = 0, b = 5;
 
 
 
@@ -46,40 +45,43 @@ public class GetCollidedArray : OnCollision
         if (timer >= timeGap)
         {
             
-            //Debug.Log("Timer" + timer);
-            /*collidedString = String.Join("",
-             new List<int>(ActivatedArray)
-             .ConvertAll(i => i.ToString())
-             .ToArray());
-            Debug.Log(collidedString);*/
-            if (StopButton.isPaused !=true)
+            
+            if (StopButton.isPaused !=true && ReadArray.IsReadFilePressed != true)
             {
                 stringActivatedArray = String.Join("",new List<int>(ActivatedArray).ConvertAll(i => i.ToString()).ToArray());
-                Debug.Log(StringActivatedArray  +"Timer "+timer);
+                //Debug.Log(StringActivatedArray  +"Timer "+timer);
                 SumArray = SumArray.Concat(ActivatedArray).ToArray();   //merge all the informations of blocks
+                stringSumArray = String.Join("", new List<int>(SumArray).ConvertAll(i => i.ToString()).ToArray());
+
                 counter += 1;
             }
+
+            
+            if (StopButton.isPaused != true && ReadArray.IsReadFilePressed == true)
+            {
+                string getArray = ReadArray.GetArray;
+                
+                stringActivatedArray = getArray[a..b];
+                if (b < getArray.Length)
+                { a += 5; b += 5; }
+                else { ReadArray.IsReadFilePressed = false; }
+                
+                //ReadArray.IsReadFilePressed = false;
+
+            }
+
+           
+
             timer = 0;
             Array.Clear(ActivatedArray, 0,arraysize);           // 這裡也要改
-            //Debug.Log("SumArray" + String.Join("",
-            // new List<int>(SumArray)
-            // .ConvertAll(i => i.ToString())
-            // .ToArray()));
+            
             
             
         }
-        if (counter == 8)
-        {
-            using(StreamWriter sw = new StreamWriter("HapticArray.txt"))
-            {
-                stringSumArray = String.Join("",new List<int>(SumArray).ConvertAll(i => i.ToString()).ToArray());
-                /*foreach (int number in SumArray)
-                {
-                    sw.WriteLine(number);
-                }*/
-                sw.WriteLine(stringSumArray);
-            }
-        }
+        
 
     }
+
+    
+
 }
