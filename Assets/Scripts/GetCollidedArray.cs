@@ -23,8 +23,9 @@ public class GetCollidedArray : OnCollision
     protected static string collidedString;
     private static string stringSumArray;
     private static string stringActivatedArray;
-    private int a = 0, b = 5;
-
+    private static int a = 1;
+    private static int b = 6;
+    private static string getArray;
 
 
     public static string StringSumArray 
@@ -44,7 +45,10 @@ public class GetCollidedArray : OnCollision
         timer += Time.deltaTime;
         if (timer >= timeGap)
         {
-            
+            if(ReadArray.GetArray is not null)
+            {
+                getArray = ReadArray.GetArray;
+            }
             
             if (StopButton.isPaused !=true && ReadArray.IsReadFilePressed != true)
             {
@@ -59,12 +63,17 @@ public class GetCollidedArray : OnCollision
             
             if (StopButton.isPaused != true && ReadArray.IsReadFilePressed == true)
             {
-                string getArray = ReadArray.GetArray;
                 
                 stringActivatedArray = getArray[a..b];
+                Debug.Log("String read from file = " + StringActivatedArray);
                 if (b < getArray.Length)
-                { a += 5; b += 5; }
-                else { ReadArray.IsReadFilePressed = false; }
+                {
+                    a += 5; b += 5;
+                   // Debug.Log("a=" + a+"b=" + b);
+                }
+                else {
+                    Debug.Log("Press IsReadFile");
+                    ReadArray.IsReadFilePressed = false; }
                 
                 //ReadArray.IsReadFilePressed = false;
 
