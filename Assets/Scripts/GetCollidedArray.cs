@@ -6,8 +6,9 @@ using System.Linq;
 public class GetCollidedArray : OnCollision
 {
     private static float timeGap = 0.9F;
-
+    private static int getArrayLength;
     private static int arraysize = 5;
+    private static int count = 0;
     public static float TimeGap
     {
         get => timeGap;
@@ -48,6 +49,9 @@ public class GetCollidedArray : OnCollision
             if(ReadArray.GetArray is not null)
             {
                 getArray = ReadArray.GetArray;
+                if (count == 0)
+                { getArrayLength = getArray.Length; count += 1; }
+                //Debug.Log("get array = "+ getArray+"length ="+getArray.Length);
             }
             
             if (StopButton.isPaused !=true && ReadArray.IsReadFilePressed != true)
@@ -56,7 +60,7 @@ public class GetCollidedArray : OnCollision
                 //Debug.Log(StringActivatedArray  +"Timer "+timer);
                 SumArray = SumArray.Concat(ActivatedArray).ToArray();   //merge all the informations of blocks
                 stringSumArray = String.Join("", new List<int>(SumArray).ConvertAll(i => i.ToString()).ToArray());
-
+                 
                 counter += 1;
             }
 
@@ -64,22 +68,23 @@ public class GetCollidedArray : OnCollision
             if (StopButton.isPaused != true && ReadArray.IsReadFilePressed == true)
             {
                 
-                stringActivatedArray = getArray[a..b];
+                Debug.Log("Array length ="+ getArrayLength);
                 Debug.Log("String read from file = " + StringActivatedArray);
-                if (b < getArray.Length)
+                if (b < getArrayLength)
                 {
                     a += 5; b += 5;
-                   // Debug.Log("a=" + a+"b=" + b);
+                    //Debug.Log("a=" + a+"b=" + b +"length ="+getArray.Length);
                 }
                 else {
                     Debug.Log("Press IsReadFile");
                     ReadArray.IsReadFilePressed = false; }
-                
+                stringActivatedArray = getArray[a..b];
+
                 //ReadArray.IsReadFilePressed = false;
 
             }
 
-           
+
 
             timer = 0;
             Array.Clear(ActivatedArray, 0,arraysize);           // 這裡也要改
