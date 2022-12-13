@@ -7,21 +7,24 @@ const char *ssid = "km13307-102";
 const char *password = "e2p57ci1w";
 char zero ='0';
 char one ='1';
+//char buffer[5];
+String buffer;
+
 // Create a server object
 WiFiServer server(6118);  // Use port 23 for the server
 
 void setup() {
   Serial.begin(115200);
-  pinMode(2, OUTPUT); 
-  pinMode(3, OUTPUT); 
-  pinMode(4, OUTPUT); 
-  pinMode(5, OUTPUT); 
-  pinMode(6, OUTPUT); 
-  digitalWrite(2, LOW);
-  digitalWrite(3, LOW);
-  digitalWrite(4, LOW);
-  digitalWrite(5, LOW);
-  digitalWrite(6, LOW);
+  pinMode(16, OUTPUT); 
+  pinMode(17, OUTPUT); 
+  pinMode(18, OUTPUT); 
+  pinMode(19, OUTPUT); 
+  pinMode(21, OUTPUT); 
+  digitalWrite(16, LOW);
+  digitalWrite(17, LOW);
+  digitalWrite(18, LOW);
+  digitalWrite(19, LOW);
+  digitalWrite(21, LOW);
   // Connect to WiFi network
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -43,13 +46,24 @@ void loop() {
   WiFiClient client = server.available();
   if (client) {
  
+    client.setTimeout(20);
     while (client.connected()) {
  
       while (client.available()>0) {
 
-        String c = client.readStringUntil('\n');
-        activate(c);
-        Serial.print(c);
+        char c = client.read();
+        buffer += c;
+        if (buffer.length()==5)
+          {activate(buffer);
+          Serial.print("send to activate ="+buffer+"\n");
+          buffer = "";}  
+        
+          
+        
+        //activate(c);
+        //Serial.print("in while"+buffer);
+
+        //Serial.write(c);
       }
  
       
@@ -66,46 +80,46 @@ void activate(String hapticArray)
   if (hapticArray[0] == one)
   {
     Serial.print("1");
-    digitalWrite(2, HIGH);
+    digitalWrite(16, HIGH);
     // delay(200);
     // digitalWrite(2,LOW);
   }
-  else{Serial.print(0);digitalWrite(2, LOW);}
+  else{Serial.print(0);digitalWrite(16, LOW);}
 
   if (hapticArray[1] == one)
   {
     Serial.print("1");
-    digitalWrite(3, HIGH);
+    digitalWrite(17, HIGH);
     // delay(200);
     // digitalWrite(3,LOW);
   }
-  else{Serial.print(0);digitalWrite(3, LOW);}
+  else{Serial.print(0);digitalWrite(17, LOW);}
 
   if (hapticArray[2] == one)
   {
     Serial.print("1");
-    digitalWrite(4, HIGH);
+    digitalWrite(18, HIGH);
     // delay(200);
     // digitalWrite(4,LOW);
   }
-  else{Serial.print(0);digitalWrite(4, LOW);}
+  else{Serial.print(0);digitalWrite(18, LOW);}
 
   if (hapticArray[3] == one)
   {
     Serial.print("1");
-    digitalWrite(5, HIGH);
+    digitalWrite(19, HIGH);
     // delay(200);
     // digitalWrite(5,LOW);
   }
-  else{Serial.print(0);digitalWrite(5, LOW);}
+  else{Serial.print(0);digitalWrite(19, LOW);}
 
   if (hapticArray[4] == one)
   {
     Serial.print("1");
-    digitalWrite(6, HIGH);
+    digitalWrite(21, HIGH);
     // delay(200);
     // digitalWrite(6,LOW);
   }
-  else{Serial.print("in here");digitalWrite(6, LOW);}
+  else{Serial.print("0");digitalWrite(21, LOW);}
 
 }

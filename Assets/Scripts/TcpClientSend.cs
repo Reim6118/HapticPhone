@@ -7,8 +7,9 @@ public class TcpClientSend : MonoBehaviour
     private float timer;
     //private string activatedArray;
     // The IP address of the server to connect to
-    private string serverIP = "172.20.10.4";
-
+    
+    //private string serverIP = "172.20.10.4";
+    private string serverIP = "172.16.230.46";
     // The port number of the server to connect to
     private int serverPort = 6118;
 
@@ -39,7 +40,7 @@ public class TcpClientSend : MonoBehaviour
         NetworkStream stream = client.GetStream();
 
         // Send data to the server
-        if (timer > 0.9 && GetCollidedArray.StringActivatedArray is not null)
+        if (timer > 0.3 && GetCollidedArray.StringActivatedArray is not null)
         {
             //Debug.Log("Timer in tcp=" + timer);
             byte[] data = System.Text.Encoding.UTF8.GetBytes(GetCollidedArray.StringActivatedArray);

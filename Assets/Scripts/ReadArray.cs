@@ -6,6 +6,11 @@ public class ReadArray : MonoBehaviour
 {
     /*private float timerself;
     private int[] slicedArray = new int[5];*/
+    private static int lengthOfFile;
+    public static int LengthOfFile
+    {
+        get => lengthOfFile;
+    }
     private static string getArray;
     public static string GetArray
     {
@@ -27,6 +32,7 @@ public class ReadArray : MonoBehaviour
         
         string[] incommingArray = File.ReadAllLines("HapticArray.txt");
         getArray = String.Join("", incommingArray);
+        lengthOfFile = getArray.Length;
         Debug.Log("Read array from file =" + getArray);
         isreadFilePressed = true;
         
