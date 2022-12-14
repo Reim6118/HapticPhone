@@ -8,8 +8,8 @@ public class TcpClientSend : MonoBehaviour
     //private string activatedArray;
     // The IP address of the server to connect to
     
-    //private string serverIP = "172.20.10.4";
-    private string serverIP = "172.16.230.46";
+    private string serverIP = "172.20.10.4";
+    //private string serverIP = "172.16.230.46";
     // The port number of the server to connect to
     private int serverPort = 6118;
 
@@ -19,7 +19,11 @@ public class TcpClientSend : MonoBehaviour
     void Start()
     {
         // Create a new TcpClient object and connect to the server
-        client.Connect(serverIP, serverPort);
+
+        
+        
+        client.Connect(serverIP,serverPort);
+
     }
 
     void Update()
