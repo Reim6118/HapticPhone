@@ -1,10 +1,10 @@
 #include <WiFi.h>
 
 // Replace these with your WiFi network's SSID and password
-// const char *ssid = "lalalalala";
-// const char *password = "lalalala";
-const char *ssid = "km13307-102";
-const char *password = "e2p57ci1w";
+const char *ssid = "lalalalala";
+const char *password = "lalalala";
+// const char *ssid = "km13307-102";
+// const char *password = "e2p57ci1w";
 char zero ='0';
 char one ='1';
 //char buffer[5];
