@@ -19,11 +19,8 @@ public class TcpClientSend : MonoBehaviour
     void Start()
     {
         // Create a new TcpClient object and connect to the server
-
-        
         
         client.Connect(serverIP,serverPort);
-
     }
 
     void Update()
