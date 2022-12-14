@@ -14,12 +14,12 @@ public class TcpClientSend : MonoBehaviour
     private int serverPort = 6118;
 
     // The TcpClient object that will be used to connect to the server
-    private TcpClient client;
+    private TcpClient client = new TcpClient();
 
     void Start()
     {
         // Create a new TcpClient object and connect to the server
-        client = new TcpClient(serverIP, serverPort);
+        client.Connect(serverIP, serverPort);
     }
 
     void Update()
