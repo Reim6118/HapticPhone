@@ -3,13 +3,11 @@ using System.IO.Ports;
 public class ArduinoSerial : MonoBehaviour
 {
     SerialPort sp;
-    float next_time; 
     private float timer;
     // Use this for initialization
     void Start()
     {
         string the_com = "";
-        next_time = Time.time;
 
         foreach (string mysps in SerialPort.GetPortNames())
         {
@@ -24,13 +22,13 @@ public class ArduinoSerial : MonoBehaviour
                 
             { the_com = mysps; Debug.Log("Port=" +mysps); break; }
         }
-        //sp = new SerialPort("\\\\.\\" + the_com, 115200);
         sp = new SerialPort( the_com, 115200);
 
         if (!sp.IsOpen)
         {
             print("Opening " + the_com + ", baud 115200");
             sp.Open();
+            
             sp.ReadTimeout = 100;
             sp.Handshake = Handshake.None;
             if (sp.IsOpen) { print("Open"); }

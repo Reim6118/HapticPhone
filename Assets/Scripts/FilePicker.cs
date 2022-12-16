@@ -1,10 +1,25 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.UI;
 public class FilePicker : MonoBehaviour
 {
     [SerializeField]
     private VideoPlayer videoplayer;
+    private NativeGallery.VideoProperties videoproperties;
+    [SerializeField]
+    private RawImage rawImage;
+    private int rawImageOriginWidth;
+    private int rawImageOriginHeight;
+    private int[] scaledVideo;
+
+    private void Start()
+    {
+        RectTransform rt = rawImage.GetComponent<RectTransform>();
+        rawImageOriginWidth = Mathf.RoundToInt(rt.rect.width);
+        rawImageOriginHeight = Mathf.RoundToInt(rt.rect.height);
+        
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         PickVideo();
@@ -74,8 +89,25 @@ public class FilePicker : MonoBehaviour
             {
                 // Play the selected video
                 //Handheld.PlayFullScreenMovie("file://" + path);
-                videoplayer.url = "file://" + path;
+                videoproperties =  NativeGallery.GetVideoProperties(path);
+                Debug.Log("Video Properties = " + videoproperties);
 
+                videoplayer.url = "file://" + path;
+                Texture vidTex = videoplayer.texture;
+                if (videoproperties.rotation == 90f || videoproperties.rotation == 270f)
+                {
+                    Debug.Log("Is 90f or 270 : " +videoproperties.rotation);
+                    //vidTex = rotateTexture((Texture2D)vidTex,true);
+                    //scaledVideo = scaleResolution(vidTex.width, vidTex.height, rawImageOriginWidth, rawImageOriginHeight);
+                    //rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scaledVideo[0]);
+                    //rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, scaledVideo[1]);
+                    rawImage.rectTransform.Rotate(0, 0, -90);
+                    rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1080);
+                    rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1920);
+
+
+
+                }
             }
         }, "Select a video");
 
@@ -104,5 +136,49 @@ public class FilePicker : MonoBehaviour
 
             Debug.Log("Permission result: " + permission);
         }
+    }
+    int[] scaleResolution(int width, int heigth, int maxWidth, int maxHeight)
+    {
+        int new_width = width;
+        int new_height = heigth;
+
+        if (width > heigth)
+        {
+            new_width = maxWidth;
+            new_height = (new_width * heigth) / width;
+        }
+        else
+        {
+            new_height = maxHeight;
+            new_width = (new_height * width) / heigth;
+        }
+
+        int[] dimension = { new_width, new_height };
+        return dimension;
+    }
+
+    Texture2D rotateTexture(Texture2D originalTexture, bool clockwise)
+    {
+        Color32[] original = originalTexture.GetPixels32();
+        Color32[] rotated = new Color32[original.Length];
+        int w = originalTexture.width;
+        int h = originalTexture.height;
+
+        int iRotated, iOriginal;
+
+        for (int j = 0; j < h; ++j)
+        {
+            for (int i = 0; i < w; ++i)
+            {
+                iRotated = (i + 1) * h - j - 1;
+                iOriginal = clockwise ? original.Length - 1 - (j * w + i) : j * w + i;
+                rotated[iRotated] = original[iOriginal];
+            }
+        }
+
+        Texture2D rotatedTexture = new Texture2D(h, w);
+        rotatedTexture.SetPixels32(rotated);
+        rotatedTexture.Apply();
+        return rotatedTexture;
     }
 }

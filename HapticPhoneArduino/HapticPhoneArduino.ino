@@ -55,7 +55,7 @@ void loop() {
   
 }
 
-void activate(String hapticArray)
+void activate(String hapticArray) 
 {
   if (hapticArray[0] == one)
   {
