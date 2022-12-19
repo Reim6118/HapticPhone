@@ -5,7 +5,7 @@ using System.Linq;
 
 public class GetCollidedArray : OnCollision
 {
-    private static float timeGap = 0.9F;
+    private static float timeGap = 0.6F;
     private static int getArrayLength;
     private static int arraysize = 5;
     private static int count = 0;

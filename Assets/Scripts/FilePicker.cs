@@ -12,6 +12,7 @@ public class FilePicker : MonoBehaviour
     private int rawImageOriginWidth;
     private int rawImageOriginHeight;
     private int[] scaledVideo;
+    private bool isRotated;
 
     private void Start()
     {
@@ -91,6 +92,11 @@ public class FilePicker : MonoBehaviour
                 //Handheld.PlayFullScreenMovie("file://" + path);
                 videoproperties =  NativeGallery.GetVideoProperties(path);
                 Debug.Log("Video Properties = " + videoproperties);
+                if(isRotated == true)
+                {
+                    rawImage.rectTransform.Rotate(0, 0, 90);
+                    isRotated = false;
+                }
 
                 videoplayer.url = "file://" + path;
                 Texture vidTex = videoplayer.texture;
@@ -102,11 +108,11 @@ public class FilePicker : MonoBehaviour
                     //rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, scaledVideo[0]);
                     //rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, scaledVideo[1]);
                     rawImage.rectTransform.Rotate(0, 0, -90);
-                    rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1080);
-                    rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1920);
-
-
-
+                    isRotated = true;
+                    //rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1080);
+                    //rawImage.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1920);
+                    rawImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1450*2);
+                    rawImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1700*2);
                 }
             }
         }, "Select a video");
