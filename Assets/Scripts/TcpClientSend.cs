@@ -41,7 +41,7 @@ public class TcpClientSend : MonoBehaviour
         NetworkStream stream = client.GetStream();
 
         // Send data to the server
-        if (timer > 0.3 && GetCollidedArray.StringActivatedArray is not null)
+        if (timer > 0.2 && GetCollidedArray.StringActivatedArray is not null)
         {
             //Debug.Log("Timer in tcp=" + timer);
             byte[] data = System.Text.Encoding.UTF8.GetBytes(GetCollidedArray.StringActivatedArray);

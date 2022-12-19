@@ -29,8 +29,8 @@ public class ReadArray : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        string[] incommingArray = File.ReadAllLines("HapticArray.txt");
+        string filepath = Path.Combine(Application.persistentDataPath, "HapticArray.txt");
+        string[] incommingArray = File.ReadAllLines(filepath);
         getArray = String.Join("", incommingArray);
         lengthOfFile = getArray.Length;
         Debug.Log("Read array from file =" + getArray);
